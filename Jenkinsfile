@@ -11,8 +11,8 @@ pipeline {
     stages {
         stage('Build') {
             environment {
-                BUILD_VERSION = "params.BUILD_VERSION"
-                DEPLOY_ENV = "params.DEPLOY_ENV"
+                BUILD_VERSION = "$params.BUILD_VERSION"
+                DEPLOY_ENV = "$params.DEPLOY_ENV"
             }
             
             steps {
