@@ -2,26 +2,24 @@ pipeline {
   agent any
   parameters {
       string (defaultValue: 'TEST', description: 'environment to deploy the application', name: 'ENV', trim: true)
-      string (name: 'USERNAME', defaultValue: 'SHRE', description: 'Enter your username')
+      choice choices: ['main', 'Master'], description: 'Selecting available branch', name: 'BRANCH'
   }
   
-  
+  environment {
+            DEPLOY_BRANCH = $BRANCH
+            DEPLOY_ENV = $ENV
+  }
 
   stages {
-    stage ('ENV Stage') {
+    stage ('BUILD') {
         steps {
-         echo "Deploying to ${params.ENV}"
-               
+            sh '''
+                   echo Deploying to ${DEPLOY_ENV}
+                   echo Code from ${DEPLOY_BRANCH} branch
+                   exit 0
+               '''   
         }
         
-    }
-    stage('Username Stage') {
-            steps {
-                script {
-                    def username = params.USERNAME
-                    echo "Hello, ${username}! This is a user stage."
-                }
-            }
     }
   }
 }
