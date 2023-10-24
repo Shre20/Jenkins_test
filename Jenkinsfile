@@ -6,8 +6,8 @@ pipeline {
   }
   
   environment {
-            DEPLOY_BRANCH = $BRANCH
-            DEPLOY_ENV = $ENV
+            DEPLOY_BRANCH = "$BRANCH"
+            DEPLOY_ENV = "$ENV"
   }
 
   stages {
