@@ -6,13 +6,14 @@ pipeline {
         string(name: 'DEPLOY_ENV', defaultValue: 'DEVELOPMENT', description: 'Enter the deployment environment')
     }
 
-    environment {
-                BUILD_VERSION = "params.BUILD_VERSION"
-                DEPLOY_ENV = "params.DEPLOY_ENV"
-            }
+    
 
     stages {
         stage('Build') {
+            environment {
+                BUILD_VERSION = "params.BUILD_VERSION"
+                DEPLOY_ENV = "params.DEPLOY_ENV"
+            }
             
             steps {
                 sh 'echo "Building version ${BUILD_VERSION} for environment ${DEPLOY_ENV}"'
