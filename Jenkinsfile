@@ -1,25 +1,23 @@
-pipeline { 
-  agent any
-  parameters {
-      string (defaultValue: 'TEST', description: 'environment to deploy the application', name: 'ENV', trim: true)
-      choice choices: ['main', 'Master'], description: 'Selecting available branch', name: 'BRANCH'
-  }
-  
-  environment {
-            DEPLOY_BRANCH = "$BRANCH"
-            DEPLOY_ENV = "$ENV"
-  }
+pipeline {
+    agent any
 
-  stages {
-    stage ('BUILD') {
-        steps {
-            sh '''
-                   echo Deploying to ${DEPLOY_ENV}
-                   echo Code from ${DEPLOY_BRANCH} branch
-                   exit 0
-               '''   
-        }
-        
+    parameters {
+        string(name: 'BUILD_VERSION', defaultValue: '1.0', description: 'Enter the build version')
+        string(name: 'DEPLOY_ENV', defaultValue: 'SHRE', description: 'Enter the deployment environment')
     }
-  }
+
+    stages {
+        stage('Build') {
+            environment {
+                BUILD_VERSION = params.BUILD_VERSION
+                DEPLOY_ENV = params.DEPLOY_ENV
+            }
+            steps {
+                sh 'echo "Building version ${BUILD_VERSION} for environment ${DEPLOY_ENV}"'
+                // Add build steps here
+            }
+        }
+
+        // Add more stages for deployment, testing, etc.
+    }
 }
