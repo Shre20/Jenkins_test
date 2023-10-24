@@ -11,7 +11,8 @@ pipeline{
         stage ('SHRE') {
             steps{
                 echo "Trying to check if jenkins process is running"
-                sh 'ps -ef | grep jenkins'
+                sh ''' ps -ef | grep jenkins
+             '''
             }
         }
 
