@@ -10,7 +10,7 @@ pipeline{
 
         stage ('TEST PARALLEL'){
             parallel {
-                stage{ 'Test on Chrome' } {
+                stage('TEST ON CHROME') {
                     steps{
                         echo "This is test on Chrome Browser"
                         sh 'ls -lrt'
@@ -19,9 +19,9 @@ pipeline{
             } 
         } 
 
-        stage ('TEST PARALLEL'){
+        stage ('TEST PARALLEL_1'){
             parallel {
-                stage{ 'Test on SAFARI' } {
+                stage('TEST ON SAFARI') {
                     steps{
                         echo "This is test on SAFARI Browser"
                         sh 'sleep 3'
