@@ -8,6 +8,13 @@ pipeline{
             }
         }
 
+        stage ('SHRE') {
+            steps{
+                echo "Trying to check if jenkins process is running"
+                sh 'ps -ef | grep jenkins'
+            }
+        }
+
         stage ('TEST PARALLEL'){
             parallel {
                 stage('TEST ON CHROME') {
