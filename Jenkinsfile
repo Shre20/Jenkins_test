@@ -3,7 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'BUILD_VERSION', defaultValue: '1.0', description: 'Enter the build version')
-        string(name: 'DEPLOY_ENV', defaultValue: 'SHRE', description: 'Enter the deployment environment')
+        string(name: 'DEPLOY_ENV', defaultValue: 'DEVELOPMENT', description: 'Enter the deployment environment')
     }
 
     stages {
@@ -19,5 +19,5 @@ pipeline {
         }
 
         // Add more stages for deployment, testing, etc.
-    }
+    }
 }
