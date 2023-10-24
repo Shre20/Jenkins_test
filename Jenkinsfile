@@ -4,12 +4,11 @@ pipeline {
       string defaultValue: 'TEST', description: 'environment to deploy the application', name: 'ENV', trim: true
   }
 
-stages {
+  stages {
     stage ('BUILD') {
         steps {
-            sh '''
-                    echo Deploying to ${params.ENV}
-               '''
+            sh ' echo Deploying to ${params.ENV} '
+               
         }
         
     }
