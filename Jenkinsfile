@@ -16,11 +16,6 @@ pipeline{
                         sh 'ls -lrt'
                     }    
                 }
-            } 
-        } 
-
-        stage ('TEST PARALLEL_1'){
-            parallel {
                 stage('TEST ON SAFARI') {
                     steps{
                         echo "This is test on SAFARI Browser"
@@ -29,6 +24,7 @@ pipeline{
                 }
             } 
         } 
+
 
         stage ('Deploy') {
             agent { label 'Shre-slave1' }
