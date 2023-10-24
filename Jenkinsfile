@@ -7,7 +7,7 @@ pipeline {
   stages {
     stage ('BUILD') {
         steps {
-            sh ' echo Deploying to ${params.ENV} '
+         echo "Deploying to ${params.ENV}"
                
         }
         
