@@ -1,33 +1,27 @@
-pipeline {
-  agent none
-  stages {
+pipeline{
+    agent any
+    stages{
+        stage ('BUILD') {
+            steps{
+                echo "This is build stage"
+                sh 'sleep 5'
+            }
+        }
 
-    stage ('BUILD') {
-      agent any
-      steps {
-        echo "This is Build stage" 
-        sh ''' 
-		sleep 5
-	        exit 0 
-	   '''
-      }  
-    }  
-    
-    stage ('TEST') {
-      agent { label 'Shre-slave1' }
-      steps {
-        echo "This is Test stage" 
-        sh 'sleep 5'
-      }  
-    }  
-    
-    stage ('DEPLOY') {
-      agent { label 'Shre-slave1' }
-      steps {
-        echo "This is Deploy stage" 
-        sh 'sleep 5'
-      }  
-    }  
-  } 
+        stage ('TEST'){
+            steps{
+                echo "This is Test stage"
+                sh 'ls -lrt'
+            }
+        }
 
+        stage ('Deploy') {
+            agent { label 'Shre-slave1' }
+            steps{
+                echo "this is deploy stage"
+                sh 'df -h'
+            }
+        }
+
+    }
 }
