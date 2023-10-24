@@ -1,46 +1,20 @@
-pipeline{
-    agent any
-    stages{
-        stage ('BUILD') {
-            steps{
-                echo "This is build stage"
-                sh 'sleep 5'
-            }
+pipeline { 
+  agent any
+  parameters {
+      string defaultValue: 'TEST', description: 'environment to deploy the application', name: 'ENV', trim: true
+  }
+
+  
+  stages {
+    stage ('BUILD') {
+        steps {
+            sh '''
+            echo Deploying to ${params.ENV}
+            exit 0
+            '''
         }
-
-        stage ('SHRE') {
-            steps{
-                echo "Trying to check if jenkins process is running"
-                sh ''' ps -ef | grep jenkins
-             '''
-            }
-        }
-
-        stage ('TEST PARALLEL'){
-            parallel {
-                stage('TEST ON CHROME') {
-                    steps{
-                        echo "This is test on Chrome Browser"
-                        sh 'ls -lrt'
-                    }    
-                }
-                stage('TEST ON SAFARI') {
-                    steps{
-                        echo "This is test on SAFARI Browser"
-                        sh 'sleep 3'
-                    }    
-                }
-            } 
-        } 
-
-
-        stage ('Deploy') {
-            agent { label 'Shre-slave1' }
-            steps{
-                echo "this is deploy stage"
-                sh 'df -h'
-            }
-        }
-
+        
     }
+
+  }
 }
