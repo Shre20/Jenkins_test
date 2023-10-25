@@ -1,26 +1,22 @@
 pipeline {
-    agent any
-
-    parameters {
-        string(name: 'BUILD_VERSION', defaultValue: '1.0', description: 'Enter the build version')
-        string(name: 'DEPLOY_ENV', defaultValue: 'DEVELOPMENT', description: 'Enter the deployment environment')
-    }
-
-    
-
+    agrnt any
     stages {
-        stage('Build') {
-            environment {
-                BUILD_VERSION = "$params.BUILD_VERSION"
-                DEPLOY_ENV = "$params.DEPLOY_ENV"
+        stage('STAGE-1') {
+            when {
+                branch 'master'
             }
-            
-            steps {
-                sh 'echo "Building version ${BUILD_VERSION} for environment ${DEPLOY_ENV}"'
-                // Add build steps here
+            steps{
+                sh "echo Stage-2 executes if branch is master"
             }
         }
 
-        // Add more stages for deployment, testing, etc.
+        stage('STAGE-2'){
+            when {
+                branch 'master'
+            }
+            steps{
+                sh "echo STAGE-2 executes if branch is master"
+            }
+        }
     }
 }
