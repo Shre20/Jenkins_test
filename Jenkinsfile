@@ -1,21 +1,32 @@
 pipeline {
     agent any
-    stages {
-        stage('STAGE-1') {
-            when {
-                branch 'master'
+    stages{
+
+        stage('BUILD'){
+            steps {
+                echo "This is Build stage"
+                sh '''
+                       sleep 5
+                       ls -lrt
+                   '''   
             }
-            steps{
-                sh "echo Stage-2 executes if branch is master"
+        }
+        stage('TEST') {
+            steps {
+                echo "This is Test stage"
+                sh '''
+                        df -h
+                   '''
+
             }
         }
 
-        stage('STAGE-2'){
-            when {
-                branch 'master'
-            }
-            steps{
-                sh "echo STAGE-2 executes if branch is master"
+        stage ('DEPLOY') {
+            steps {
+                echo "This is Deploy stage"
+                sh '''
+                       sleep 5
+                   '''    
             }
         }
     }
