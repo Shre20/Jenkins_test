@@ -33,7 +33,6 @@ pipeline{
             } 
         } 
 
-
         stage ('Deploy') {
             agent { label 'Shre-slave1' }
             steps{
