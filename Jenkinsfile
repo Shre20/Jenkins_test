@@ -1,25 +1,23 @@
 pipeline {
     agent any
+    
     stages {
-        stage('PARALLEL') {
-            parallel {
-                stage('STAGE-1') {
-                    when {
-                        branch 'main'
-                    }
-                    steps {
-                        sh "echo STAGE-2 executes if branch is main"
-                    }
-                }
-
-                stage('STAGE-2') {
-                    when {
-                        branch 'main'
-                    }
-                    steps {
-                        sh "echo STAGE-2 executes if branch is main"
-                    }
-                }
+        stage('Checkout') {
+            steps {
+                // Checkout the repository
+                checkout scm
+            }
+        }
+        
+        stage('Build') {
+            when {
+                // Define conditions for 'master' branch execution
+                expression { return env.BRANCH_NAME == 'master' }
+            }
+            steps {
+                // Your build steps here
+                sh 'echo "Building on master branch"'
+                // Add your build commands or scripts
             }
         }
     }
