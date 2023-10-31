@@ -5,10 +5,10 @@ pipeline {
             parallel {
                 stage('STAGE-1') {
                     when {
-                        branch 'master'
+                        branch 'main'
                     }
                     steps {
-                        sh "echo STAGE-2 executes if branch is master"
+                        sh "echo STAGE-2 executes if branch is main"
                     }
                 }
 
